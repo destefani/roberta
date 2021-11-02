@@ -7,8 +7,7 @@ import onnxruntime
 
 app = Flask(__name__)
 tokenizer = RobertaTokenizer.from_pretrained("roberta-base")
-session = onnxruntime.InferenceSession(
-        "roberta-sequence-classification-9.onnx")
+session = onnxruntime.InferenceSession("roberta-sequence-classification-9.onnx")
 
 @app.route("/predict", methods=["POST"])
 def predict():
@@ -21,7 +20,7 @@ def predict():
     else:
         numpy_func = input_ids.cpu().numpy()
 
-    inputs = {session.get_inputs()[0].name: numpy_func(input_ids)}
+    inputs = {session.get_inputs()[0].name: numpy_func}
     out = session.run(None, inputs)
 
     result = np.argmax(out)
