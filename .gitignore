@@ -1,0 +1,4 @@
+# Enviroment
+venv/
+# Model
+roberta-sequence-classification-9.onnx
